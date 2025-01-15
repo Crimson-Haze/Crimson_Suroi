@@ -73,6 +73,7 @@ export const enum PerkIds {
     Claustrophobic = "claustrophobic",
     LacedStimulants = "laced_stimulants",
     RottenPlumpkin = "rotten_plumpkin",
+    Nothing = "nothing",
     PriorityTarget = "priority_target"
 }
 
@@ -395,6 +396,17 @@ const perks = [
         adrenLoss: 5, // percentage
         healthLoss: 5, // absolute
         noDrop: true
+    },
+    {
+        idString: PerkIds.Nothing,
+        name: "Nothing",
+        description: "LOLOLOLOLOLOLOL GET TROLLED.",
+        category: PerkCategories.Halloween,
+        type: PerkQualities.Negative, //
+
+        noDrop: true,
+        noSwap: true,
+        plumpkinGambleIgnore: true
     },
     {
         idString: PerkIds.PriorityTarget,
