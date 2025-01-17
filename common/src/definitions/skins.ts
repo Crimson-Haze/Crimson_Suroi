@@ -95,6 +95,7 @@ export const Skins = ObjectDefinitions.withDefault<SkinDefinition>()(
                 ["Bee",             0x4a4a4a],
                 ["Armadillo",       0xa68c5e],
                 ["Printer",         0xffffff],
+                ["Hamburgr",        0xff0000], //"This skin was made because my autocorrect turned Hasanger into Hamburger" - Crimson_Haze
                 ["Distant Shores",  0x7eca83]
             ] satisfies ReadonlyArray<readonly [string, number]>).map(([name, tint]) => skin([name, tint])),
             ...([
