@@ -20,6 +20,7 @@ export const Scopes = ObjectDefinitions.withDefault<ScopeDefinition>()(
         }));
 
         return [
+            scope([0.5], { zoomLevel: 30 }),
             scope(
                 [1],
                 {
