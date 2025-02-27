@@ -275,6 +275,11 @@ export async function fetchServerData(game: Game): Promise<void> {
 
         updateServerSelectors();
     });
+
+    if (window.location.hash) {
+        teamID = window.location.hash.slice(1);
+        $("#btn-join-team").trigger("click");
+    }
 }
 
 // Take the stuff that needs fetchServerData out of setUpUI and put it here
@@ -1405,7 +1410,7 @@ export async function setUpUI(game: Game): Promise<void> {
         });
 
         const value = game.console.getBuiltInCVar(settingName) as number;
-        // callback?.(value); why is this here?
+        callback?.(value);
         element.value = value.toString();
     }
 
@@ -1739,7 +1744,7 @@ export async function setUpUI(game: Game): Promise<void> {
         "cv_ui_scale",
         () => {
             updateUiScale();
-            game.map.resize();
+            game.map?.resize();
         }
     );
 
@@ -1754,28 +1759,28 @@ export async function setUpUI(game: Game): Promise<void> {
         "#slider-minimap-transparency",
         "cv_minimap_transparency",
         () => {
-            game.map.updateTransparency();
+            game.map?.updateTransparency();
         }
     );
     addSliderListener(
         "#slider-big-map-transparency",
         "cv_map_transparency",
         () => {
-            game.map.updateTransparency();
+            game.map?.updateTransparency();
         }
     );
     addCheckboxListener(
         "#toggle-hide-minimap",
         "cv_minimap_minimized",
         value => {
-            game.map.visible = !value;
+            if (game.map) game.map.visible = !value;
         }
     );
 
     game.console.variables.addChangeListener(
         "cv_map_expanded",
         (_, newValue) => {
-            game.map.expanded = newValue;
+            if (game.map) game.map.expanded = newValue;
         }
     );
 
@@ -2355,12 +2360,6 @@ export async function setUpUI(game: Game): Promise<void> {
     continueBtn.on("click", () => {
         ui.warningModal.hide();
     });
-
-    const joinTeam = $("#btn-join-team");
-    if (window.location.hash) {
-        teamID = window.location.hash.slice(1);
-        joinTeam.trigger("click");
-    }
 
     // Makes social buttons unclickable for 1.5 seconds after disconnecting, to prevent accidental clicks
     $(".btn-social").on("click", e => {
